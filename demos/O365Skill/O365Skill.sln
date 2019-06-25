@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "O365Skill.Functions", "O365Skill.Functions\O365Skill.Functions.csproj", "{2BB3893D-50C7-4A89-BEEA-5020F34ECE46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "O365Skill.Graph", "O365Skill.Graph\O365Skill.Graph.csproj", "{ED805AB1-E0BD-4D85-8AF1-2995665A2705}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Graph.Auth", "msgraph-sdk-dotnet-auth\src\Microsoft.Graph.Auth\Microsoft.Graph.Auth.csproj", "{696A7B6A-10C6-408D-87BC-F16CC70CB6CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "O365Skill.Service", "O365Skill.Service\O365Skill.Service.csproj", "{4067539C-D241-4B2C-A32B-48C9D91FB620}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BB3893D-50C7-4A89-BEEA-5020F34ECE46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB3893D-50C7-4A89-BEEA-5020F34ECE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BB3893D-50C7-4A89-BEEA-5020F34ECE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB3893D-50C7-4A89-BEEA-5020F34ECE46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED805AB1-E0BD-4D85-8AF1-2995665A2705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED805AB1-E0BD-4D85-8AF1-2995665A2705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED805AB1-E0BD-4D85-8AF1-2995665A2705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED805AB1-E0BD-4D85-8AF1-2995665A2705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696A7B6A-10C6-408D-87BC-F16CC70CB6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696A7B6A-10C6-408D-87BC-F16CC70CB6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696A7B6A-10C6-408D-87BC-F16CC70CB6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696A7B6A-10C6-408D-87BC-F16CC70CB6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4067539C-D241-4B2C-A32B-48C9D91FB620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4067539C-D241-4B2C-A32B-48C9D91FB620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4067539C-D241-4B2C-A32B-48C9D91FB620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4067539C-D241-4B2C-A32B-48C9D91FB620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8D786A4-B245-458A-A223-F18C19DE2F0B}
+	EndGlobalSection
+EndGlobal

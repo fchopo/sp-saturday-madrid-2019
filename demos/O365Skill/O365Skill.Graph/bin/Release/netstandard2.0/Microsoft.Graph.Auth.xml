@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Graph.Auth</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Graph.Auth.AuthorizationCodeProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by authorization code flow for web apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthorizationCodeProvider.#ctor(Microsoft.Identity.Client.IConfidentialClientApplication,System.String[])">
+            <summary>
+            Construct a new <see cref="T:Microsoft.Graph.Auth.AuthorizationCodeProvider"/>
+            </summary>
+            <param name="confidentialClientApplication"><see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/> used to authentication requests.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default if none is set.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthorizationCodeProvider.CreateClientApplication(System.String,System.String,Microsoft.Identity.Client.ClientCredential,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/>.
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="redirectUri">Also named <i>Reply URI</i>, the redirect URI is the URI where the STS (Security Token Service) will call back the application
+             with the security token. For details see https://aka.ms/msal-net-client-applications.</param>
+            <param name="clientCredential">A <see cref="T:Microsoft.Identity.Client.ClientCredential"/> created either from an application secret or a certificate.</param>
+            <param name="tokenStorageProvider">An <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token. </param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>common</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"></exception>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthorizationCodeProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token.
+            If an access token doesn't exist, it will throw a <see cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+            and the web app must handle this and perform a challange.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthorizationCodeProvider.GetTokenByAuthorizationCodeAsync(System.String)">
+            <summary>
+            Helper used in Startup class to retrieve a token from an authorization code.
+            </summary>
+            <param name="authorizationCode">An authorization code received from an openid connect auth flow.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.ClientCredentialProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by client credential flow.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.ClientCredentialProvider.#ctor(Microsoft.Identity.Client.IConfidentialClientApplication)">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.ClientCredentialProvider"/>
+            </summary>
+            <param name="confidentialClientApplication">A <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.ClientCredentialProvider"/> for authentication.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.ClientCredentialProvider.CreateClientApplication(System.String,Microsoft.Identity.Client.ClientCredential,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/>
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app)</param>
+            <param name="clientCredential">A <see cref="T:Microsoft.Identity.Client.ClientCredential"/> created either from an application secret or a certificate</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token. </param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>common</c> if non is specified</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com) </param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.ClientCredentialProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.OnBehalfOfProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by on behalf of flow.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.OnBehalfOfProvider.#ctor(Microsoft.Identity.Client.IConfidentialClientApplication,System.String[])">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.OnBehalfOfProvider"/>
+            </summary>
+            <param name="confidentialClientApplication">A <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.OnBehalfOfProvider"/> for authentication.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default when none is set.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.OnBehalfOfProvider.CreateClientApplication(System.String,System.String,Microsoft.Identity.Client.ClientCredential,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/>
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="redirectUri">also named <i>Reply URI</i>, the redirect URI is the URI where the STS (Security Token Service) will call back the application
+             with the security token. For details see https://aka.ms/msal-net-client-applications.</param>
+            <param name="clientCredential">A <see cref="T:Microsoft.Identity.Client.ClientCredential"/> created either from an application secret or a certificate.</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token.</param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>common</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IConfidentialClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.OnBehalfOfProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.OnBehalfOfProvider.GetGraphUserAccountFromJwt(System.String)">
+            <summary>
+            Creats a <see cref="T:Microsoft.Graph.GraphUserAccount"/> object from a JWT access token.
+            </summary>
+            <param name="jwtAccessToken">JWT token to parse.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.AuthenticationException">
+            <summary>
+            Graph authentication exception
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthenticationException.#ctor(Microsoft.Graph.Error,System.Exception)">
+            <summary>
+            Creates a new authentication exception.
+            </summary>
+            <param name="error">The error that triggered the exception.</param>
+            <param name="innerException">The possible inner exception.</param>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.AuthenticationException.Error">
+            <summary>
+            The error from the authentication exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.AuthenticationProviderExtensions.GetRetryAfter(Microsoft.Graph.IAuthenticationProvider,Microsoft.Identity.Client.MsalServiceException)">
+            <summary>
+            Gets retry after timespan from <see cref="T:System.Net.Http.Headers.RetryConditionHeaderValue"/>.
+            </summary>
+            <param name="serviceException">A <see cref="T:Microsoft.Identity.Client.MsalServiceException"/> with RetryAfter header</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.BaseRequestExtensions.WithScopes``1(``0,System.String[])">
+            <summary>
+            Sets Microsoft Graph's scopes that will be used by <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> to authenticate this request
+            and can be used to perform incremental scope consent.
+            This only works with the default authentication handler and default set of Microsoft graph authentication providers.
+            If you use a custom authentication handler or authentication provider, you have to handle it's retrieval in your implementation.
+            </summary>
+            <param name="baseRequest">The <see cref="T:Microsoft.Graph.IBaseRequest"/>.</param>
+            <param name="scopes">Microsoft graph scopes used to authenticate this request.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.BaseRequestExtensions.WithForceRefresh``1(``0,System.Boolean)">
+            <summary>
+            Sets MSAL's force refresh flag to <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> for this request. If set to true, <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> will refresh existing access token in cahce.
+            This defaults to false if not set.
+            </summary>
+            <param name="baseRequest">The <see cref="T:Microsoft.Graph.IBaseRequest"/>.</param>
+            <param name="forceRefresh">A <see cref="T:System.Boolean"/> flag to determine whether refresh access token or not.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.BaseRequestExtensions.WithUserAccount``1(``0,Microsoft.Graph.GraphUserAccount)">
+            <summary>
+            Sets <see cref="T:Microsoft.Graph.GraphUserAccount"/> to be used to retrieve an access token for this request.
+            It is also used to handle multi-user/ multi-tenant access token cache storage and retrieval.
+            </summary>
+            <param name="baseRequest">The <see cref="T:Microsoft.Graph.IBaseRequest"/>.</param>
+            <param name="userAccount">A <see cref="T:Microsoft.Graph.GraphUserAccount"/> that represents a user account. At a minimum, the ObjectId and TenantId must be set.
+            </param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.BaseRequestExtensions.WithUserAssertion``1(``0,Microsoft.Identity.Client.UserAssertion)">
+            <summary>
+            Sets <see cref="T:Microsoft.Identity.Client.UserAssertion"/> for this request.
+            This should only be used with <see cref="T:Microsoft.Graph.Auth.OnBehalfOfProvider"/>.
+            </summary>
+            <param name="baseRequest">The <see cref="T:Microsoft.Graph.IBaseRequest"/>.</param>
+            <param name="userAssertion">A <see cref="T:Microsoft.Identity.Client.UserAssertion"/> for the user.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.BaseRequestExtensions.WithUsernamePassword``1(``0,System.String,System.String)">
+            <summary>
+            Sets a username (email) and password of an Azure AD account to authenticate.
+            This should only be used with <see cref="T:Microsoft.Graph.Auth.UsernamePasswordProvider"/>.
+            This provider is NOT RECOMMENDED because it exposes the users password.
+            We recommend you use <see cref="T:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider"/> instead.
+            </summary>
+            <param name="baseRequest">The <see cref="T:Microsoft.Graph.IBaseRequest"/>.</param>
+            <param name="email">Email address of the user to authenticate.</param>
+            <param name="password">Password of the user to authenticate.</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.MsalAuthenticationBase">
+            <summary>
+            Abstract class containing common API methods and properties to retrieve an access token. All authentication providers extend this class
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.MsalAuthenticationBase.ClientApplication">
+            <summary>
+            A <see cref="T:Microsoft.Identity.Client.ClientApplicationBase"/> property
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.MsalAuthenticationBase.Scopes">
+            <summary>
+            A scopes property
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.MsalAuthenticationBase.MaxRetry">
+            <summary>
+            A MaxRetry property.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.MsalAuthenticationBase.#ctor(System.String[])">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.MsalAuthenticationBase"/>
+            </summary>
+            <param name="graphScopes">Scopes requested to access a protected API</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.MsalAuthenticationBase.GetAccessTokenSilentAsync(Microsoft.Graph.Auth.MsalAuthenticationProviderOption)">
+            <summary>
+            Attempts to acquire access token from the token cache silently by calling AcquireTokenSilentAsync
+            </summary>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.DeviceCodeProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by device code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.DeviceCodeProvider.DeviceCodeResultCallback">
+            <summary>
+            DeviceCodeResultCallback property
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.DeviceCodeProvider.#ctor(Microsoft.Identity.Client.IPublicClientApplication,System.String[],System.Func{Microsoft.Identity.Client.DeviceCodeResult,System.Threading.Tasks.Task})">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.DeviceCodeProvider"/>
+            </summary>
+            <param name="publicClientApplication">A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.DeviceCodeProvider"/> for authentication.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default when none is set.</param>
+            <param name="deviceCodeResultCallback">Callback containing information to show the user about how to authenticate and enter the device code.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.DeviceCodeProvider.CreateClientApplication(System.String,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/>
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token.</param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>organizations</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.DeviceCodeProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by integrated windows authentication.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider.#ctor(Microsoft.Identity.Client.IPublicClientApplication,System.String[])">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider"/>
+            </summary>
+            <param name="publicClientApplication">A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.DeviceCodeProvider"/> for authentication.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default when none is set.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider.CreateClientApplication(System.String,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/>
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token.</param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>organizations</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.InteractiveAuthenticationProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token interactively
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.InteractiveAuthenticationProvider.UIBehavior">
+            <summary>
+            A UIBehavior property
+            </summary>
+        </member>
+        <member name="P:Microsoft.Graph.Auth.InteractiveAuthenticationProvider.UIParent">
+            <summary>
+            A UIParent property
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.InteractiveAuthenticationProvider.#ctor(Microsoft.Identity.Client.IPublicClientApplication,System.String[],System.Nullable{Microsoft.Identity.Client.UIBehavior},Microsoft.Identity.Client.UIParent)">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.InteractiveAuthenticationProvider"/>
+            </summary>
+            <param name="publicClientApplication">A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.DeviceCodeProvider"/> for authentication.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default when none is set.</param>
+            <param name="uiBehavior">Designed interactive experience for the user. Defaults to <see cref="F:Microsoft.Identity.Client.UIBehavior.SelectAccount"/>.</param>
+            <param name="uiParent">Object containing a reference to the parent window/activity. REQUIRED for Xamarin.Android only.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.InteractiveAuthenticationProvider.CreateClientApplication(System.String,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/>.
+            On mobile platforms (UWP and Xamarin), a secure and performant storage mechanism is implemeted by MSAL and you shouldn't pass a <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> implementation.
+            For more details about custom token cache serialization, visit https://aka.ms/msal-net-serialization.
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token.</param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>common</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.InteractiveAuthenticationProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.UsernamePasswordProvider">
+            <summary>
+            An <see cref="T:Microsoft.Graph.IAuthenticationProvider"/> implementation using MSAL.Net to acquire token by username and password.
+            This only works with work and school accounts.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.UsernamePasswordProvider.#ctor(Microsoft.Identity.Client.IPublicClientApplication,System.String[])">
+            <summary>
+            Constructs a new <see cref="T:Microsoft.Graph.Auth.UsernamePasswordProvider"/>. This provider is NOT RECOMMENDED because it exposes the users password.
+            We recommend you use <see cref="T:Microsoft.Graph.Auth.IntegratedWindowsAuthenticationProvider"/> instead.
+            </summary>
+            <param name="publicClientApplication">A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/> to pass to <see cref="T:Microsoft.Graph.Auth.DeviceCodeProvider"/> for authentication.</param>
+            <param name="scopes">Scopes required to access Microsoft Graph. This defaults to https://graph.microsoft.com/.default when none is set.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.UsernamePasswordProvider.CreateClientApplication(System.String,Microsoft.Graph.Auth.ITokenStorageProvider,System.String,Microsoft.Graph.Auth.NationalCloud)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/>
+            </summary>
+            <param name="clientId">Client ID (also known as <i>Application ID</i>) of the application as registered in the application registration portal (https://aka.ms/msal-net-register-app).</param>
+            <param name="tokenStorageProvider">A <see cref="T:Microsoft.Graph.Auth.ITokenStorageProvider"/> for storing and retrieving access token.</param>
+            <param name="tenant">Tenant to sign-in users. This defaults to <c>organizations</c> if non is specified.</param>
+            <param name="nationalCloud">A <see cref="T:Microsoft.Graph.Auth.NationalCloud"/> which identifies the national cloud endpoint to use as the authority. This defaults to the global cloud <see cref="F:Microsoft.Graph.Auth.NationalCloud.Global"/> (https://login.microsoftonline.com).</param>
+            <returns>A <see cref="T:Microsoft.Identity.Client.IPublicClientApplication"/></returns>
+            <exception cref="T:Microsoft.Graph.Auth.AuthenticationException"/>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.UsernamePasswordProvider.AuthenticateRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Adds an authentication header to the incoming request by checking the application's <see cref="T:Microsoft.Identity.Client.TokenCache"/>
+            for an unexpired access token. If a token is not found or expired, it gets a new one.
+            </summary>
+            <param name="httpRequestMessage">A <see cref="T:System.Net.Http.HttpRequestMessage"/> to authenticate.</param>
+        </member>
+        <member name="T:Microsoft.Graph.Auth.ITokenStorageProvider">
+            <summary>
+            Interface for token storage and Retrieval.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.ITokenStorageProvider.SetTokenCacheAsync(System.String,System.Byte[])">
+            <summary>
+            Set's token cache with a provided cacheId key.
+            </summary>
+            <param name="cacheId">A unique key used to identify a token cache item.</param>
+            <param name="tokenCache">The token cache item to store.</param>
+        </member>
+        <member name="M:Microsoft.Graph.Auth.ITokenStorageProvider.GetTokenCacheAsync(System.String)">
+            <summary>
+            Retrieves a token cache item with the provided cacheId key.
+            </summary>
+            <param name="cacheId">A unique key used to identify a token cache item.</param>
+        </member>
+    </members>
+</doc>

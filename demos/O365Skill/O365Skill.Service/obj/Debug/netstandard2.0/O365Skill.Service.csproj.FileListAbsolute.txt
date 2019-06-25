@@ -1,0 +1,15 @@
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\O365Skill.Service.deps.json
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\O365Skill.Service.dll
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\Microsoft.Graph.Auth.dll
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\O365Skill.Graph.dll
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\O365Skill.Graph.pdb
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\Microsoft.Graph.Auth.pdb
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\Microsoft.Graph.Auth.xml
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.csprojAssemblyReference.cache
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.csproj.CoreCompileInputs.cache
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.AssemblyInfoInputs.cache
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.AssemblyInfo.cs
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.csproj.CopyComplete
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\bin\Debug\netstandard2.0\O365Skill.Service.pdb
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.dll
+C:\Users\FerranChopoGarcia\source\repos\Alexa\O365Skill\O365Skill.Service\obj\Debug\netstandard2.0\O365Skill.Service.pdb
